@@ -1,0 +1,44 @@
+{
+"dummy1" : {
+	"name" : "blaues Licht",
+	"type" : "light",
+	"loc" : {
+		"room" : "foo",
+		"bulding" : "bar"
+	},
+	"ts" : "2018-03-04T12:55:02.856Z",
+	"status" : "on",
+	"knx": {
+		"ga": "1/1/1",
+		"status_ga" : "1/1/101"
+	}
+},
+"dummy2" : {
+	"name" : "rotes Licht",
+	"type" : "light",
+	"loc" : {
+		"room" : "foo",
+		"bulding" : "bar"
+	},
+	"ts" : "2018-03-04T12:55:02.856Z",
+	"status" : "on",
+	"knx": {
+		"ga": "1/1/1",
+		"status_ga" : "1/1/101"
+	}
+}
+,
+"dummy3" : {
+	"name" : "grunes Licht",
+	"type" : "light",
+	"loc" : {
+		"room" : "foo",
+		"bulding" : "bar"
+	},
+	"ts" : "2018-03-04T12:55:02.856Z",
+	"status" : "on",
+	"knx": {
+		"ga": "1/1/1",
+		"status_ga" : "1/1/101"
+	}
+}}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>API Example</title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <!-- Load jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+    <!-- Load JsViews latest version, from www.jsviews.com: -->
+    <script src="https://www.jsviews.com/download/jsviews.js"></script>
+    <script src="https://www.jsviews.com/download/jsrender.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.7.0.js"></script>
+
+    <script id="lightTmpl" type="text/x-jsrender">
+        Light is: <span class="bool">{^{:device.status}}</span>
+    </script>
+
+    <script id="devicesTmpl" type="text/x-jsrender">
+        <div>
+            {^{on 'click' '.bool' toggle}} {^{props devices}}
+            <div>
+                {^{:prop.device.name}} {^{include prop tmpl="#" + prop.device.type + "Tmpl" /}}
+            </div>
+            {{/props}} {{/on}}
+        </div>
+    </script>
+
+    <div id="devices"></div>
+    <ul id="messages"></ul>
+
+    <script>
+        (function() {
+            var deviceList = {
+                devices: {},
+                updateDevice: function(device) {
+                    $.observable(this.devices).setProperty(device.id, device);
+                },
+                toggle: function(ev, evdata) {
+                    var data = $.view(ev.target).data;
+                    socket.emit('update bool', {
+                        id: data.id,
+                        value: data.device.status === 'on' ? 'off' : 'on'
+                    })
+                }
+            };
+
+            var socket = io();
+
+            $.templates("#devicesTmpl").link("#devices", deviceList);
+            socket.on('update', function(data) {
+                deviceList.updateDevice(data);
+            });
+        })();
+    </script>
+</body>
+
+</html>
